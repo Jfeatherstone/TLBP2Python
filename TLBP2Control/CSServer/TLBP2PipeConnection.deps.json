@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "TLBP2PipeConnection/1.0.0": {
+        "dependencies": {
+          "Thorlabs.TLBP2_32.Interop": "7.0.4809.11"
+        },
+        "runtime": {
+          "TLBP2PipeConnection.dll": {}
+        }
+      },
+      "Thorlabs.TLBP2_32.Interop/7.0.4809.11": {
+        "runtime": {
+          "Thorlabs.TLBP2_32.Interop.dll": {
+            "assemblyVersion": "7.0.4809.11",
+            "fileVersion": "7.0.4809.11"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TLBP2PipeConnection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Thorlabs.TLBP2_32.Interop/7.0.4809.11": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
