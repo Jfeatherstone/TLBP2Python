@@ -11,7 +11,7 @@ namespace TLBP2PipeConnection
     class PipeServer
     {
 
-        // This has to be the same in both python and c#, so should be constant
+        // This has to be the same in both python and c#, so should probably not be changed
         private const string PIPE_NAME = "TLBP2PyConnection";
         private static TLBP2 bp2Device = null;
 
@@ -170,7 +170,7 @@ namespace TLBP2PipeConnection
         }
 
         /// <summary>
-        /// search for connected devices and connect to the first one.
+        /// Search for connected devices and connect to the first one.
         /// Use only driver functions and structures.
         /// 
         /// Taken from the sample C# program provided by Thorlabs, probably found
@@ -215,10 +215,18 @@ namespace TLBP2PipeConnection
             return bp2Device;
         }
 
+        /// <summary>
+        /// Set up certain settings for the device, and start up the drum inside.
+        /// Usually takes about 10 seconds for the drum to get up to speed;
+        /// method does not hold until this is the case.
+        /// 
+        /// Taken from the sample C# program provided by Thorlabs, probably found
+        /// somewhere like:
+        /// C:\Program Files (x86)\IVI Foundation\VISA\WinNT\TLBP2\Examples\MS VS 2012 CSharp Demo
+        /// </summary>
         static private int RampUpDrumSpeed(TLBP2 bp2Device)
         {
-            // Ramp up the drum speed
-            // I took this almost verbatim from the sample C# program Thorlabs provides, 
+            // I took most of this verbatim from the sample C# program Thorlabs provides, 
             // so I'm not exactly sure what it all does... :/
 
             // increase the drum speed
@@ -230,6 +238,11 @@ namespace TLBP2PipeConnection
 
             // activate the position correction to have the same calculation results as the Thorlabs Beam Application
             status = bp2Device.set_position_correction(true);
+
+            // disable averaging since this can be done in python to the user's specification
+            // 1 = no averaging
+            // 0 = blocked averaging (probably doesn't really matter)
+            status = bp2Device.set_averaging(1, 0);
 
             // activate the automatic gain calcuation
             status = bp2Device.set_auto_gain(true);
@@ -253,9 +266,7 @@ namespace TLBP2PipeConnection
         /// probably found somewhere like:
         /// C:\Program Files (x86)\IVI Foundation\VISA\WinNT\TLBP2\Examples\MS VS 2012 CSharp Demo
         /// 
-        /// Status return codes:
-        /// 0: Success, measurements provided in out params
-        /// 1: Drum speed unstable, cannot perform measurements yet
+        /// Returns a string of the measurement values, with fields separated by the pipe character ('|')
         /// </summary>
         static private string GetMeasurement(TLBP2 bp2Device)
         {
@@ -372,6 +383,10 @@ namespace TLBP2PipeConnection
             return "";
         }
 
+        /// <summary>
+        /// This method ensures that the beam profiler drum stops spinning whenever the application
+        /// is exited (by any means).
+        /// </summary>
         static void onProcessExit(object sender, EventArgs e)
         {
             bp2Device?.Dispose();

@@ -19,8 +19,9 @@ For example usage, see the `BeamProfilerExample` notebook in the root directory 
 ### Requirements
 
 - 64-bit Python (I used v3.8, but any >3 should be fine)
-- pywin32 (for creating the pipe)
-- .NET Desktop Runtime v3.1 x86
+- pywin32 (for creating the pipe; installed via pip)
+- [.NET Desktop Runtime v3.1 x86](https://dotnet.microsoft.com/download/dotnet/3.1)
+- [ThorLabs Beam Profiler Software (likely not actually needed, as assembly file is included here, though useful for testing)](https://www.thorlabs.com/software_pages/ViewSoftwarePage.cfm?Code=Beam)
 
 ### Usage
 
