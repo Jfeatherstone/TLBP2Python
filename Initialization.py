@@ -15,10 +15,11 @@ def fullInitialization():
     print("Howdy!\n")
     print("This procedure will ensure that the Thorlabs Beam Profiler is ready to be used with this library" +
 
-    print("\nThe library will require that you have .NETCore installed, as it runs a C# server in the" + 
+    print("\nThe library will require that you have .NET Desktop Runtime installed, as it runs a C# server in the" + 
             "\nbackground to control the beam profiler:")
     print(' '*5 + "https://dotnet.microsoft.com/download/dotnet/3.1")
-    
+    print(' '*5 + 'Even if you run a 64-bit system, you will need to install the x86 .NET Desktop Runtime!')
+
     while True:
         try:
 
